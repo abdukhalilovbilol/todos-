@@ -14,11 +14,11 @@ const PORT = process.env.PORT || 8000; // env port ucun
 
 
 
-function start() {
+async function start() {
     try {
-        mongoose.connect(process.env.MONGO_URL, {
+       await mongoose.connect(process.env.MONGO_URL, {
             useNewUrlParser: true,
-        });
+        }).then(() => console.log("db ok")).catch(() => console.log("db bad"));
         app.listen(PORT, () => console.log(`Server: http://localhost:${PORT}`));
     } catch (error) {
         console.log(error);
